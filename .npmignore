@@ -1,0 +1,15 @@
+.nyc_output
+.vscode
+coverage
+node_modules
+docs
+src
+test
+
+.eslint*
+.travis.yml
+index.html
+README.zh-CN.md
+rollup.config.js
+yarn.lock
+CNAME

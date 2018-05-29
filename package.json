@@ -1,0 +1,39 @@
+{
+  "name": "@toomee/api-proxy",
+  "version": "1.0.0",
+  "description": "node 前后端分离接口代理模块",
+  "main": "lib/model-proxy.js",
+  "scripts": {
+    "test": "nyc ava",
+    "test-cov": "nyc --reporter=html --reporter=text ava",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toomeefed/api-proxy.git"
+  },
+  "keywords": [],
+  "author": "楼教主 <fe.52cik@gmail.com> (http://www.52cik.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toomeefed/api-proxy/issues"
+  },
+  "homepage": "https://github.com/toomeefed/api-proxy#readme",
+  "dependencies": {
+    "@sindresorhus/is": "^0.9.0",
+    "@toomee/maybe-store": "^1.0.1",
+    "got": "^8.3.1",
+    "koa-compose": "^4.1.0",
+    "ms": "^2.1.1"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "coveralls": "^3.0.1",
+    "delay": "^3.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "get-port": "^3.2.0",
+    "nyc": "^11.8.0"
+  }
+}
