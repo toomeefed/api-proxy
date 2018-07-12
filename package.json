@@ -1,6 +1,6 @@
 {
   "name": "@toomee/api-proxy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "node 前后端分离接口代理模块",
   "main": "lib/model-proxy.js",
   "scripts": {
@@ -20,23 +20,23 @@
   },
   "homepage": "https://github.com/toomeefed/api-proxy#readme",
   "dependencies": {
-    "@sindresorhus/is": "^0.9.0",
+    "@sindresorhus/is": "^0.11.0",
     "@toomee/maybe-store": "^1.0.2",
-    "got": "^8.3.1",
+    "got": "^8.3.2",
     "koa-compose": "^4.1.0",
     "ms": "^2.1.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "coveralls": "^3.0.1",
+    "coveralls": "^3.0.2",
     "delay": "^3.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
     "get-port": "^3.2.0",
-    "nyc": "^11.8.0"
+    "nyc": "^12.0.2"
   },
   "engines": {
-		"node": ">=8.6.0"
-	}
+    "node": ">=8.6.0"
+  }
 }
