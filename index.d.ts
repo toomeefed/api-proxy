@@ -2,25 +2,14 @@
 // Project https://github.com/toomeefed/api-proxy#readme
 // TypeScript Version: 2.9
 
+import got from 'got';
 import { Middleware } from 'koa-compose';
 
 declare namespace ModelProxy {
   /**
    * 请求方法
    */
-  type Methods =
-    | 'get'
-    | 'post'
-    | 'put'
-    | 'patch'
-    | 'head'
-    | 'delete'
-    | 'GET'
-    | 'POST'
-    | 'PUT'
-    | 'PATCH'
-    | 'HEAD'
-    | 'DELETE';
+  type Methods = 'get' | 'post' | 'put' | 'patch' | 'head' | 'delete';
 
   interface IProfile {
     /**
@@ -43,6 +32,10 @@ declare namespace ModelProxy {
      * 编码 (默认 utf8)
      */
     encoding?: string;
+    /**
+     * 超时控制 (支持ms格式)
+     */
+    timeout?: string | number;
   }
 
   interface IProfiles {
@@ -81,11 +74,23 @@ declare namespace ModelProxy {
     interfaces: IProfile[];
   }
 
+  interface ICache {
+    /**
+     * 缓存时间
+     */
+    time: string | number;
+    /**
+     * 自定义缓存key
+     * @param ctx 代理上下文对象
+     */
+    key(ctx: IContext): string;
+  }
+
   interface IGotEngineContext {
     /**
      * 缓存时间
      */
-    cache: string | number;
+    cache: string | number | ICache;
     /**
      * 是否命中缓存
      */
@@ -93,12 +98,35 @@ declare namespace ModelProxy {
     /**
      * 响应对象 (got返回)
      */
-    res?: object;
+    response?: got.Response<object>;
     /**
      * 返回数据
      */
     body?: string | object;
     // stream?: object;
+  }
+
+  interface IRequest {
+    /**
+     * 是否解析 json
+     */
+    json?: boolean;
+    /**
+     * 请求参数
+     */
+    query?: string|object;
+    /**
+     * POST 参数
+     */
+    body?: string|object;
+    /**
+     * restful 参数
+     */
+    params?: object;
+    /**
+     * 引擎
+     */
+    engine?: string;
   }
 
   interface IContext extends IGotEngineContext {
@@ -117,7 +145,7 @@ declare namespace ModelProxy {
     /**
      * 接口模型配置
      */
-    model: object;
+    model: IProfile;
     /**
      * 配置参数
      */
@@ -125,7 +153,7 @@ declare namespace ModelProxy {
     /**
      * 请求参数
      */
-    req: object;
+    request: IRequest;
   }
 
   interface IGotEngineOptions {
@@ -145,6 +173,14 @@ declare namespace ModelProxy {
      * 是否 gzip 压缩
      */
     decompress?: boolean;
+    /**
+     * 超时控制 (支持ms格式)
+     */
+    timeout?: string | number;
+    /**
+     * 缓存时间
+     */
+    cache?: string | number | ICache;
   }
 
   interface IEngine {
@@ -161,7 +197,7 @@ declare namespace ModelProxy {
     addEngine(name: string, NewEngine: IEngine): void;
   }
 
-  interface IModelFn extends IEngine {
+  interface IModelFn {
     /**
      * 请求方法
      * @param name 接口id
@@ -171,10 +207,11 @@ declare namespace ModelProxy {
   }
 
   type ModelFn = IModelFn &
+    IEngine &
     Record<'get' | 'post' | 'put' | 'patch' | 'head' | 'delete', IModelFn>;
 
-  declare interface IModelProxy {
-    new (interfaces: IProfiles, option?: object): ModelFn;
+  interface IModelProxy {
+    new (interfaces: IProfiles, option?: any): ModelFn;
   }
 }
 
