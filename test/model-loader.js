@@ -33,4 +33,6 @@ test('ModelLoader throw Error', (t) => {
   t.throws(() => new ModelLoader(profiles), TypeError);
   profiles.interfaces = [{ id: 'a', path: '/' }, { id: 'a', path: '/' }];
   t.throws(() => new ModelLoader(profiles), TypeError);
+  profiles.interfaces = [{ id: 'a', path: '/', host: 'unknown' }];
+  t.throws(() => new ModelLoader(profiles), TypeError);
 });
