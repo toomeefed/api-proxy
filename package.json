@@ -1,6 +1,6 @@
 {
   "name": "@toomee/api-proxy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "node 前后端分离接口代理模块",
   "main": "lib/model-proxy.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/toomeefed/api-proxy#readme",
   "dependencies": {
     "@sindresorhus/is": "^0.11.0",
-    "@toomee/maybe-store": "^1.1.1",
+    "@toomee/maybe-store": "^1.1.2",
     "got": "^8.3.2",
     "koa-compose": "^4.1.0",
     "ms": "^2.1.1"

@@ -210,6 +210,14 @@ declare namespace ModelProxy {
     IEngine &
     Record<'get' | 'post' | 'put' | 'patch' | 'head' | 'delete', IModelFn>;
 
+  interface IModelProxyOptions {
+    cache: {
+      /** 存储 key 前缀 */
+      prefix?: string;
+      store?: any;
+    },
+  }
+
   interface IModelProxy {
     new (interfaces: IProfiles, option?: any): ModelFn;
   }
